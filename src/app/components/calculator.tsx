@@ -38,6 +38,12 @@ export default function Calculator() {
     setKellyFraction(Math.max(0, kellyFraction) * 100);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      calculateValues();
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl mx-auto">
       <Card className="w-full md:w-1/2">
@@ -61,6 +67,7 @@ export default function Calculator() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setProbabilityOfSuccess(e.target.value)
               }
+              onKeyDown={handleKeyDown}
               placeholder="Enter probability (0-1)"
             />
           </div>
@@ -97,14 +104,6 @@ export default function Calculator() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {result !== null && (
-            <div className="p-4 bg-gray-100 rounded-md">
-              <p className="text-center font-semibold">
-                Expected Value:{" "}
-                <span className="text-blue-600">{result.toFixed(2)}</span>
-              </p>
-            </div>
-          )}
           {kellyFraction !== null && (
             <div className="p-4 bg-gray-100 rounded-md">
               <p className="text-center font-semibold">
