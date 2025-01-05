@@ -28,16 +28,14 @@ export default function Calculator() {
       return;
     }
 
-    // Calculate Expected Value
+    // Calculate Portfolio Size
     const expectedValue = p * w - (1 - p) * l;
     setResult(expectedValue);
 
     // Calculate Kelly Criterion
     const q = 1 - p; // probability of failure
-    const g = w / 100; // convert win rate to fraction
-    const lossRateFraction = l / 100; // convert loss rate to fraction
-    const kellyFraction = p / lossRateFraction - q / g;
-    setKellyFraction(Math.max(0, Math.min(1, kellyFraction))); // Ensure fraction is between 0 and 1
+    const kellyFraction = p / l - q / w;
+    setKellyFraction(Math.max(0, kellyFraction) * 100);
   };
 
   return (
